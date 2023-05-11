@@ -19,23 +19,24 @@ public class PlaylistActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     VerticalAdapter adapter;
     List<PlayItem> playItemList;
-
+    DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist);
         textView = findViewById(R.id.textView);
         recyclerView = findViewById(R.id.recyclerView);
+        db = new DatabaseHelper(this);
         setupList();
     }
 
     private void setupList() {
-        //playItemList = db.getAllAdverts();
+        playItemList = db.getAllPlayItems();
         adapter = new VerticalAdapter(playItemList, new OnItemClickListener() {
             @Override public void onItemClick(PlayItem playItem) {
                 System.out.println("PlayItem "+playItem.getUrl()+" clicked!");
                 Intent intent = new Intent(PlaylistActivity.this, PlayVideoActivity.class);
-                intent.putExtra("playItem", playItem);
+                intent.putExtra("url", playItem.getUrl());
                 startActivity(intent);
             }
         });

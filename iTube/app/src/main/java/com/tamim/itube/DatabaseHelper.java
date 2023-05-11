@@ -48,7 +48,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(USER_TABLE_NAME, new String[] { "id", "name", "username", "password" },
                 "username=?", new String[] { username }, null, null, null, null);
-        if (cursor != null) cursor.moveToFirst();
+        if( cursor != null && cursor.getCount() > 0 ) {
+            cursor.moveToFirst();
+        } else {
+            return null;
+        }
 
         User user = new User(cursor);
         cursor.close();
