@@ -61,9 +61,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
     private void handleRemoteAudio() {
-
+        Intent i= new Intent(MainActivity.this,RemoteAudioActivity.class);
+        startActivity(i);
     }
     private void handleRemoteVideo() {
-
+        Intent i= new Intent(MainActivity.this,RemoteVideoActivity.class);
+        startActivity(i);
     }
 }
